@@ -7,6 +7,14 @@ import routes from './routes';
 
 const { REACT_APP_ENV } = process.env;
 
+import { theme } from 'antd';
+import { convertLegacyToken } from '@ant-design/compatible';
+
+const { defaultAlgorithm, defaultSeed } = theme;
+
+const mapToken = defaultAlgorithm(defaultSeed);
+const v4Token = convertLegacyToken(mapToken);
+
 export default defineConfig({
   /**
    * @name 开启 hash 模式
@@ -131,6 +139,9 @@ export default defineConfig({
     },
   ],
   mfsu: {
-    exclude :['@playwright/test']
+    exclude: ['@playwright/test'],
+  },
+  lessLoader: {
+    modifyVars: v4Token,
   },
 });
